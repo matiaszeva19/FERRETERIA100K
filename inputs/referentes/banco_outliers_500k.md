@@ -24,6 +24,21 @@
 
 ---
 
+## 2B. Extracción en Vivo vía Apify (27/11/2026 — Links Reales `+500K` con Guardados y Compartidos)
+
+| Red | Cuenta | Vistas | Guardados | Compartidos | Formato ganador (con link real) | Qué clonamos para Indunor |
+| :--- | :--- | ---: | ---: | ---: | :--- | :--- |
+| **TikTok** | `@pabloelectrum` | **1,8M** | **35.846** *(2,0%)* | **17.300** *(1,0%)* | [ASMR de Herramientas](https://www.tiktok.com/@pabloelectrum/video/7682603698857495816) | 15s de sonido real y seco en mostrador (clic cinta métrica, pistola silicona, rosca de bulón, gatillo Lüsqtoff). |
+| **TikTok** | `@juve3dstudio` | **1,6M** | **18.385** *(1,15%)* | **5.650** | [Herramientas compactas y potentes](https://www.tiktok.com/@juve3dstudio/video/7712576916137528594) | Mostrar potencia real en mano de una máquina **Lüsqtoff** en 20 segundos. |
+| **TikTok** | `@bourvill33` | **1,8M** | **7.005** | **9.539** *(0,53%)* | [¿Para qué te rompés la espalda si afloja en 2s?](https://www.tiktok.com/@bourvill33/video/7710532853427178765) | Hook de dolor físico + demo rápida en 2s (genera envíos directos entre gente de taller). |
+| **TikTok** | `@coba.ferreteria` | **876K** | **5.611** | **1.247** | [Un día más atendiendo en una ferretería](https://www.tiktok.com/@coba.ferreteria/video/7698496950886288658) | Escena real de mostrador resolviendo un pedido concreto. |
+| **TikTok** | `@ferreteria.el.volcan` | **1,5M** | **8.175** | **11.100** *(0,74%)* | [Cuando son las 5:59pm y cerramos a las 6:00pm](https://www.tiktok.com/@ferreteria.el.volcan/video/7500373946450054417) | Versión Campana: sábado 12:55 hs (cerramos a las 13 hs) entrando a buscar el último tornillo/silicona. |
+| **TikTok** | `@modern.diy0` | **28,4M** | **344.957** *(1,21%)* | **184.600** *(0,65%)* | [Bricolaje satisfactorio](https://www.tiktok.com/@modern.diy0/video/7669986865516268831) | Corte limpio, pegado limpio y demostración visual sin texto excesivo. |
+| **IG Reels** | `@marito.laurens` *(fuera de nicho)* | **538K** | — | *(1.175 com.)* | [¿Estoy errado? Los leo…](https://www.instagram.com/p/DeuxK8exrcJ/) | Postura firme de oficio en mostrador preguntando "¿Estoy errado?" para disparar comentarios y compartidos. |
+| **IG Reels** | `@marito.laurens` *(fuera de nicho)* | **173K** | — | *(3.878 likes)* | [No pagues de más al pedo](https://www.instagram.com/p/DgNYNG7xxbj/) | "No compres con los ojos" / te avisamos qué te conviene en mostrador para no tirar plata. |
+
+---
+
 ## 3. Patrón Común de los `+500K` (La Fórmula de Guardados y Compartidos)
 1. **Un objeto que el 90% ya tiene o necesita hoy** (cinta métrica, silicona, tornillo, baño, pintura).
 2. **Un secreto o alerta de plata en los primeros 2 segundos** (*"nadie te explicó esto de..."* / *"fijate esto antes de pagarlo..."*).
