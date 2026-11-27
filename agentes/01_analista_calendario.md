@@ -5,9 +5,10 @@
 
 ## Análisis Previo Obligatorio (Cero Inercia)
 Antes de proponer un solo tema, debe analizar:
-1. `inputs/metricas/` y los resultados previos de `@indunorferreteria` (vistas, retención 0–3s, guardados, compartidos, comentarios, mensajes por WhatsApp).
+1. `inputs/metricas/` y los resultados previos de `@indunorferreteria` (vistas, retención 0–3s, **guardados, compartidos por DM**, comentarios y mensajes por WhatsApp).
 2. Qué funcionó y qué fracasó (ej. flyers quietos 0–1 like vs. Reels humanos/local 46–274 likes).
-3. Balance real del negocio (`cerebro/00_identidad_negocio.md`): ~60–70% Mayorista/Industrial + ~30–40% Nueva Línea Minorista.
+3. **Banco de Outliers `+500K` (`inputs/referentes/banco_outliers_500k.md`):** revisar y nutrir siempre con videos probados de **`+500K` vistas** (en TikTok e Instagram) que el algoritmo premió por **guardados y compartidos**, tanto **dentro del nicho ferretero** como **fuera del nicho (comercios de mostrador)**, para adaptar su estructura a Indunor.
+4. Balance real del negocio (`cerebro/00_identidad_negocio.md`): ~60–70% Mayorista/Industrial + ~30–40% Nueva Línea Minorista.
 
 ## Entregable Obligatorio
 - **Reporte breve de métricas:** Qué repetir, qué cortar y por qué.

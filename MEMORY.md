@@ -35,3 +35,8 @@ Prohibido redactar párrafos largos para recitar de memoria. Cada una de las 4 p
 - **Publicación directa para Video 4 (Combo Finde):** Como tiene urgencia de hoy viernes / mañana sábado, va **directo al perfil** para que lo vean de inmediato tus seguidores de Campana.
 - **Métrica Norte (qué mirar de verdad):** **Compartidos (envíos por mensaje)** + **Guardados** + **Consultas al WhatsApp** (por encima de likes). Cada cierre de Videos 1–3 debe invitar naturalmente a **guardar** o **mandárselo a alguien**.
 - **Regla anti-duplicado:** Nunca resubir un video idéntico; si una idea se vuelve a probar en Trial, cambiar los primeros 3 segundos o el texto inicial.
+
+### 6. Investigación Obligatoria de Outliers `+500K` (Dentro y Fuera del Nicho)
+- Toda ronda de investigación (`analista-calendario`) debe nutrir `inputs/referentes/banco_outliers_500k.md` buscando videos probados de **`+500K` vistas** con altos **guardados y compartidos**:
+  - **Dentro del nicho:** ferreterías, herramientas, bricolaje, hogar.
+  - **Fuera del nicho:** comercios locales con mostrador (carnicerías, talleres, pinturerías, bazares) cuya estructura se pueda traer a Indunor Campana.
