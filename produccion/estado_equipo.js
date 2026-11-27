@@ -1,9 +1,9 @@
 // Estado en tiempo real del Equipo Indunor Ferretería — leído por oficina3d/index.html
 window.ESTADO_EQUIPO = {
   negocio: "Indunor Ferretería (@indunorferreteria) — Campana",
-  actualizado: "2026-11-27 00:08",
-  foco: "Limpieza de PC y Drive + Cerebro actualizado (Estándar Canva 1:1 · Métricas 1.602 vs 818 · Formato Ping-Pong · Competencia 26/11)",
-  ciclo_actual: "Repositorio y Drive limpios con solo entregables vigentes + Cerebro actualizado con aprendizajes de Noviembre 2026",
+  actualizado: "2026-11-27 04:25",
+  foco: "Secuencia Telaraña de Contenido (4 Fichas de Mostrador Cero Memorización) para rodaje hoy Viernes 14:00 hs + registro en MEMORY.md",
+  ciclo_actual: "Viernes 14:00 hs: 4 Fichas de Mostrador conectadas (Contraste -> Autoridad -> Objeciones -> Combo Finde) + Checklist de Bandeja (15 min)",
   agentes: [
     {
       id: "maestro",
@@ -11,10 +11,10 @@ window.ESTADO_EQUIPO = {
       subtitulo: "Orquestador & Quality Gate",
       estado: "ENTREGADO",
       color: "#38bdf8",
-      rol: "Eliminó toda repetición de productos de Semana 1 y concentró la Semana 2 en las 5 líneas nuevas del catálogo (Electrodos, Alambre, Siliconas, Cintas y Bulonería) bajo el Formato A (Ping-Pong).",
-      analisis_previo: "Combina el 2x de alcance del Hook estructurado (1.602 vs 818 vistas) con preguntas detrás de cámara sobre 5 productos frescos de alta rotación.",
+      rol: "Reemplazó los videos sueltos por la Secuencia de 4 Roles en Ficha de Mostrador (Telaraña de Contenido) para grabar hoy viernes 14:00 hs en 15 minutos y fijó el estándar en MEMORY.md.",
+      analisis_previo: "Cruzó catálogo prioritario de /cerebro/ (discos 115mm, siliconas, bulonería fraccionada y combo pintura/sellado) con el formato Cero Memoria validado (1.602 vs 818 vistas).",
       conexiones: ["cerebro", "analista", "guionista", "carruseles", "editor"],
-      entregable_actual: "Paquete Semana 2 (5 Productos Nuevos en Formato A)"
+      entregable_actual: "produccion/guiones/viernes_secuencia_4_fichas_mostrador.md"
     },
     {
       id: "analista",
