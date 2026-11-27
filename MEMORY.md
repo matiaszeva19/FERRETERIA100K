@@ -40,3 +40,4 @@ Prohibido redactar párrafos largos para recitar de memoria. Cada una de las 4 p
 - Toda ronda de investigación (`analista-calendario`) debe nutrir `inputs/referentes/banco_outliers_500k.md` buscando videos probados de **`+500K` vistas** con altos **guardados y compartidos**:
   - **Dentro del nicho:** ferreterías, herramientas, bricolaje, hogar.
   - **Fuera del nicho:** comercios locales con mostrador (carnicerías, talleres, pinturerías, bazares) cuya estructura se pueda traer a Indunor Campana.
+- **Formato descartado por el creador:** **CERO ASMR** (descartar cualquier idea o variante basada en ASMR; priorizar cara real, preguntas de mostrador y demos prácticas habladas).

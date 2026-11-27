@@ -24,11 +24,10 @@
 
 ---
 
-## 2B. Extracción en Vivo vía Apify (27/11/2026 — Links Reales `+500K` con Guardados y Compartidos)
+## 2B. Extracción en Vivo vía Apify (27/11/2026 — Links Reales `+500K` con Guardados y Compartidos · *ASMR descartado*)
 
 | Red | Cuenta | Vistas | Guardados | Compartidos | Formato ganador (con link real) | Qué clonamos para Indunor |
 | :--- | :--- | ---: | ---: | ---: | :--- | :--- |
-| **TikTok** | `@pabloelectrum` | **1,8M** | **35.846** *(2,0%)* | **17.300** *(1,0%)* | [ASMR de Herramientas](https://www.tiktok.com/@pabloelectrum/video/7682603698857495816) | 15s de sonido real y seco en mostrador (clic cinta métrica, pistola silicona, rosca de bulón, gatillo Lüsqtoff). |
 | **TikTok** | `@juve3dstudio` | **1,6M** | **18.385** *(1,15%)* | **5.650** | [Herramientas compactas y potentes](https://www.tiktok.com/@juve3dstudio/video/7712576916137528594) | Mostrar potencia real en mano de una máquina **Lüsqtoff** en 20 segundos. |
 | **TikTok** | `@bourvill33` | **1,8M** | **7.005** | **9.539** *(0,53%)* | [¿Para qué te rompés la espalda si afloja en 2s?](https://www.tiktok.com/@bourvill33/video/7710532853427178765) | Hook de dolor físico + demo rápida en 2s (genera envíos directos entre gente de taller). |
 | **TikTok** | `@coba.ferreteria` | **876K** | **5.611** | **1.247** | [Un día más atendiendo en una ferretería](https://www.tiktok.com/@coba.ferreteria/video/7698496950886288658) | Escena real de mostrador resolviendo un pedido concreto. |
