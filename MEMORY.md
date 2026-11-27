@@ -29,3 +29,9 @@ Prohibido redactar párrafos largos para recitar de memoria. Cada una de las 4 p
 - Consultar siempre `/cerebro/` antes de proponer productos, medidas o promos (nunca inventar precios ni stock).
 - **No prometer "venta por mayor y menor" en un producto individual** sin confirmar primero si ese ítem específico tiene venta mayorista (`cerebro/00_identidad_negocio.md`).
 - Aplicar siempre el **Filtro Anti-IA** (`cerebro/03_estilo_creador_y_produccion.md`) y entregar **1 sola decisión final** (cero opciones A/B/C).
+
+### 5. Distribución Inteligente en Instagram (Actualizado con `@Kaye.creates` — `k-FNGqaindk`)
+- **Trial Reels ("Reels de Prueba") para Videos 1, 2 y 3:** Subirlos activando el botón **"Prueba / Trial"** para que Instagram los muestre primero solo a **gente nueva que no te sigue** sin ensuciar el perfil. A las 24 horas: si traccionan en compartidos/guardados, compartirlos al perfil (o dejar activo "Compartir automáticamente").
+- **Publicación directa para Video 4 (Combo Finde):** Como tiene urgencia de hoy viernes / mañana sábado, va **directo al perfil** para que lo vean de inmediato tus seguidores de Campana.
+- **Métrica Norte (qué mirar de verdad):** **Compartidos (envíos por mensaje)** + **Guardados** + **Consultas al WhatsApp** (por encima de likes). Cada cierre de Videos 1–3 debe invitar naturalmente a **guardar** o **mandárselo a alguien**.
+- **Regla anti-duplicado:** Nunca resubir un video idéntico; si una idea se vuelve a probar en Trial, cambiar los primeros 3 segundos o el texto inicial.

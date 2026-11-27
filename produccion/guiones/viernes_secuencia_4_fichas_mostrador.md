@@ -4,6 +4,10 @@
 > - Grabás **4 videos cortos seguidos** en 15 minutos.
 > - **Nadie estudia de memoria:** vos leés la pregunta desde atrás del celular y el encargado/dueña contesta normal, como atendiendo a un cliente.
 > - En edición le ponés arriba chiquito: **`Duda de Mostrador #1`** hasta **`#4`**.
+>
+> **Cómo subirlos en Instagram para multiplicar vistas (Truco "Reel de Prueba"):**
+> - **Videos 1, 2 y 3:** antes de tocar "Compartir", activá la opción **"Prueba / Trial"**. Instagram se los muestra primero a **gente nueva que todavía no te sigue**. A las 24 hs mirás cuántos **compartidos y guardados** tuvieron (importan mucho más que los likes); si anduvieron bien, los pasás al perfil.
+> - **Video 4 (Combo Finde):** subilo **normal directo al perfil** hoy viernes, así lo ven al toque tus seguidores de Campana antes del sábado a las 13 hs.
 
 ---
 
@@ -22,7 +26,7 @@
    - **Toma 1 (al empezar):** Juntá los dos discos de canto bien de cerca (o doblá apenas el barato) para que se vea la diferencia.
    - **Toma 2:** Acercá el celular al disco bueno para que se vea el espesor.
    - **Toma 3:** Mostrá la caja o pila de discos en el mostrador.
-   - **Cierre:** *"Guardate este video antes de comprar discos, y mirá el #2 donde te muestro el error más común con la silicona."*
+   - **Cierre (para que lo compartan/guarden):** *"Mandáselo al que siempre compra el disco más barato, y mirá el #2 con el error más común de la silicona."*
 
 ---
 
