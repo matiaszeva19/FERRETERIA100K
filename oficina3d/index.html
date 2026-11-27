@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oficina 3D — Equipo Indunor Ferretería</title>
+  <script src="../produccion/estado_equipo.js"></script>
+  <style>
+    :root {
+      --bg: #070b14;
+      --panel: rgba(13, 20, 35, 0.88);
+      --border: rgba(56, 189, 248, 0.22);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+    #canvas-container {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+    }
+    /* Top bar */
+    .topbar {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      right: 376px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 18px;
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .pulse-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 12px #10b981;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.6; }
+    }
+    .brand h1 { font-size: 15px; font-weight: 700; letter-spacing: 0.2px; }
+    .brand p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+    button {
+      background: rgba(56, 189, 248, 0.14);
+      color: #e0f2fe;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    button:hover { background: rgba(56, 189, 248, 0.28); transform: translateY(-1px); }
+    button.primary {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      border-color: #60a5fa;
+      color: #fff;
+    }
+    /* Right inspector panel */
+    .sidebar {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      bottom: 16px;
+      width: 344px;
+      z-index: 10;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .sidebar-header {
+      padding: 16px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+    .sidebar-header h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); }
+    .sidebar-header .meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .roster {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .pill:hover, .pill.active {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.18);
+      color: #fff;
+    }
+    .pill .dot { width: 7px; height: 7px; border-radius: 50%; }
+    .inspector {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .card-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    .card-value { font-size: 13px; line-height: 1.48; color: var(--text); }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(16, 185, 129, 0.16);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .badge.working {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.45);
+    }
+    .conn-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .conn-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #bae6fd;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .hint {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      z-index: 10;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    @media (max-width: 900px) {
+      .topbar { right: 16px; }
+      .sidebar { top: auto; height: 42vh; width: calc(100vw - 32px); }
+      .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="canvas-container"></div>
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="pulse-dot"></div>
+      <div>
+        <h1 id="biz-title">Indunor Ferretería — Oficina 3D Agéntica</h1>
+        <p id="biz-sub">Cargando estado del equipo...</p>
+      </div>
+    </div>
+    <div class="controls">
+      <a href="../produccion/Calendario_Mes_01_Indunor_Clienta.pdf" target="_blank" style="text-decoration:none;"><button class="primary" type="button">📅 PDF Calendario</button></a>
+      <a href="../produccion/Guiones_y_Posts_Semana_01_Indunor.pdf" target="_blank" style="text-decoration:none;"><button class="primary" type="button">🎬 PDF Guiones + Posts</button></a>
+      <button id="btn-sim">▶ Simular Flujo en Vivo</button>
+      <button id="btn-reset-cam">🎯 Centrar Cámara</button>
+      <button id="btn-reload">↻ Recargar Estado</button>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Sala de Operaciones</h2>
+      <div class="meta" id="cycle-text">Clic en un escritorio 3D o abajo para inspeccionar</div>
+    </div>
+    <div class="roster" id="roster-pills"></div>
+    <div class="inspector" id="inspector-body"></div>
+  </aside>
+
+  <div class="hint">
+    🖱️ Arrastrar para rotar · Rueda para zoom · Clic en cualquier escritorio 3D para ver su análisis y conexiones
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.getElementById('canvas-container').innerHTML =
+        '<div style="padding:40px;color:#f87171;font-size:15px;">No se pudo cargar Three.js (revisá tu conexión a internet o abrí con http://localhost:8765/oficina3d/).</div>';
+      throw new Error('THREE not loaded');
+    }
+
+    const state = window.ESTADO_EQUIPO || {
+      negocio: "Indunor Ferretería (@indunorferreteria)",
+      actualizado: "Sin datos",
+      foco: "Mayorista + Minorista",
+      ciclo_actual: "Modo demo",
+      agentes: [],
+      flujos: []
+    };
+
+    document.getElementById('biz-title').textContent = state.negocio;
+    document.getElementById('biz-sub').textContent = `${state.foco} · Act: ${state.actualizado}`;
+    document.getElementById('cycle-text').textContent = state.ciclo_actual;
+
+    // Scene Setup
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('#070b14');
+    scene.fog = new THREE.FogExp2('#070b14', 0.024);
+
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 150);
+    camera.position.set(13, 12, 15);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    container.appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.maxPolarAngle = Math.PI / 2.15;
+    controls.minDistance = 7;
+    controls.maxDistance = 32;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.45;
+
+    // Lighting
+    scene.add(new THREE.AmbientLight('#94a3b8', 0.75));
+    const dirLight = new THREE.DirectionalLight('#e2e8f0', 1.4);
+    dirLight.position.set(10, 18, 10);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.set(1024, 1024);
+    scene.add(dirLight);
+
+    const coreLight = new THREE.PointLight('#38bdf8', 2.6, 18);
+    coreLight.position.set(0, 3.2, 0);
+    scene.add(coreLight);
+
+    // Floor & Grid (Industrial Office Floor)
+    const floor = new THREE.Mesh(
+      new THREE.CylinderGeometry(13.5, 13.5, 0.3, 48),
+      new THREE.MeshStandardMaterial({ color: '#0f172a', roughness: 0.75, metalness: 0.25 })
+    );
+    floor.position.y = -0.15;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    const grid = new THREE.GridHelper(24, 24, '#1e3a5f', '#132038');
+    grid.position.y = 0.01;
+    scene.add(grid);
+
+    // Positions for Brain + Maestro + 4 Subagents
+    const nodePositions = {
+      cerebro: new THREE.Vector3(0, 0, -2.2),
+      maestro: new THREE.Vector3(0, 0, 2.0),
+      analista: new THREE.Vector3(-6.0, 0, -3.5),
+      guionista: new THREE.Vector3(6.0, 0, -3.5),
+      carruseles: new THREE.Vector3(-5.8, 0, 4.4),
+      editor: new THREE.Vector3(5.8, 0, 4.4)
+    };
+
+    const interactiveMeshes = [];
+    const agentVisuals = {};
+
+    // Helper: Label Sprite
+    function makeLabel(title, subtitle, colorHex) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 512; canvas.height = 140;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = 'rgba(10, 16, 30, 0.88)';
+      ctx.strokeStyle = colorHex;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.roundRect(12, 12, 488, 116, 20);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#f8fafc';
+      ctx.font = 'bold 28px Inter, Segoe UI, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(title, 256, 58);
+
+      ctx.fillStyle = colorHex;
+      ctx.font = '600 20px Inter, Segoe UI, sans-serif';
+      ctx.fillText(subtitle, 256, 98);
+
+      const tex = new THREE.CanvasTexture(canvas);
+      const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+      const sprite = new THREE.Sprite(mat);
+      sprite.scale.set(3.8, 1.05, 1);
+      return sprite;
+    }
+
+    // 1. Build Central Brain ("El Cerebro")
+    const brainGroup = new THREE.Group();
+    brainGroup.position.copy(nodePositions.cerebro);
+    const pedestal = new THREE.Mesh(
+      new THREE.CylinderGeometry(1.1, 1.35, 0.8, 24),
+      new THREE.MeshStandardMaterial({ color: '#1e293b', metalness: 0.6, roughness: 0.3 })
+    );
+    pedestal.position.y = 0.4;
+    pedestal.castShadow = true;
+    brainGroup.add(pedestal);
+
+    const brainCore = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(0.75, 1),
+      new THREE.MeshStandardMaterial({
+        color: '#38bdf8',
+        emissive: '#0284c7',
+        emissiveIntensity: 1.3,
+        wireframe: true
+      })
+    );
+    brainCore.position.y = 1.9;
+    brainGroup.add(brainCore);
+
+    const brainInner = new THREE.Mesh(
+      new THREE.SphereGeometry(0.42, 20, 20),
+      new THREE.MeshStandardMaterial({ color: '#bae6fd', emissive: '#38bdf8', emissiveIntensity: 1.5 })
+    );
+    brainInner.position.y = 1.9;
+    brainGroup.add(brainInner);
+
+    const brainLabel = makeLabel('EL CEREBRO (cerebro/)', 'Fuente Única de Verdad', '#38bdf8');
+    brainLabel.position.set(0, 3.35, 0);
+    brainGroup.add(brainLabel);
+    scene.add(brainGroup);
+
+    // 2. Build Workstation for Maestro + 4 Subagents
+    function createStation(agentData) {
+      const pos = nodePositions[agentData.id];
+      const group = new THREE.Group();
+      group.position.copy(pos);
+
+      const isMaster = agentData.id === 'maestro';
+      const scale = isMaster ? 1.18 : 1.0;
+
+      // Platform ring
+      const ring = new THREE.Mesh(
+        new THREE.RingGeometry(1.65 * scale, 1.82 * scale, 36),
+        new THREE.MeshBasicMaterial({ color: agentData.color, side: THREE.DoubleSide, transparent: true, opacity: 0.55 })
+      );
+      ring.rotation.x = -Math.PI / 2;
+      ring.position.y = 0.03;
+      group.add(ring);
+
+      // Desk
+      const desk = new THREE.Mesh(
+        new THREE.BoxGeometry(2.3 * scale, 0.14, 1.25 * scale),
+        new THREE.MeshStandardMaterial({ color: '#1e293b', roughness: 0.5, metalness: 0.35 })
+      );
+      desk.position.y = 0.9;
+      desk.castShadow = true;
+      desk.userData = { agentId: agentData.id };
+      group.add(desk);
+      interactiveMeshes.push(desk);
+
+      // Desk Legs
+      const legGeo = new THREE.BoxGeometry(0.1, 0.9, 0.1);
+      const legMat = new THREE.MeshStandardMaterial({ color: '#0f172a', metalness: 0.7 });
+      [[-1.0, -0.5], [1.0, -0.5], [-1.0, 0.5], [1.0, 0.5]].forEach(([lx, lz]) => {
+        const leg = new THREE.Mesh(legGeo, legMat);
+        leg.position.set(lx * scale, 0.45, lz * scale);
+        group.add(leg);
+      });
+
+      // Monitor
+      const monitor = new THREE.Mesh(
+        new THREE.BoxGeometry(1.1 * scale, 0.65 * scale, 0.07),
+        new THREE.MeshStandardMaterial({
+          color: '#0b1120',
+          emissive: agentData.color,
+          emissiveIntensity: 0.42
+        })
+      );
+      monitor.position.set(0, 1.38, -0.32 * scale);
+      monitor.userData = { agentId: agentData.id };
+      group.add(monitor);
+      interactiveMeshes.push(monitor);
+
+      // Agent Avatar (Stylized Operator)
+      const body = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.24, 0.32, 0.75, 16),
+        new THREE.MeshStandardMaterial({ color: agentData.color, roughness: 0.4 })
+      );
+      body.position.set(0, 1.12, 0.42 * scale);
+      body.castShadow = true;
+      body.userData = { agentId: agentData.id };
+      group.add(body);
+      interactiveMeshes.push(body);
+
+      const head = new THREE.Mesh(
+        new THREE.SphereGeometry(0.24, 18, 18),
+        new THREE.MeshStandardMaterial({ color: '#f1f5f9', roughness: 0.3 })
+      );
+      head.position.set(0, 1.72, 0.42 * scale);
+      head.userData = { agentId: agentData.id };
+      group.add(head);
+      interactiveMeshes.push(head);
+
+      // Status beacon above head
+      const beacon = new THREE.Mesh(
+        new THREE.SphereGeometry(0.11, 12, 12),
+        new THREE.MeshBasicMaterial({ color: agentData.color })
+      );
+      beacon.position.set(0, 2.22, 0.42 * scale);
+      group.add(beacon);
+
+      const label = makeLabel(agentData.nombre, agentData.subtitulo, agentData.color);
+      label.position.set(0, 2.95, 0);
+      group.add(label);
+
+      // Face towards center
+      if (!isMaster) {
+        group.lookAt(0, 0, 0);
+      }
+      scene.add(group);
+      agentVisuals[agentData.id] = { group, ring, monitor, beacon, baseColor: agentData.color };
+    }
+
+    state.agentes.forEach(createStation);
+
+    // 3. Build Glowing Connection Tubes & Data Packets
+    const packets = [];
+    state.flujos.forEach(([fromId, toId], idx) => {
+      const p1 = nodePositions[fromId].clone().add(new THREE.Vector3(0, 1.0, 0));
+      const p2 = nodePositions[toId].clone().add(new THREE.Vector3(0, 1.0, 0));
+      const mid = p1.clone().lerp(p2, 0.5);
+      mid.y += 1.15;
+
+      const curve = new THREE.QuadraticBezierCurve3(p1, mid, p2);
+      const tube = new THREE.Mesh(
+        new THREE.TubeGeometry(curve, 24, 0.03, 8, false),
+        new THREE.MeshBasicMaterial({ color: '#38bdf8', transparent: true, opacity: 0.28 })
+      );
+      scene.add(tube);
+
+      const dot = new THREE.Mesh(
+        new THREE.SphereGeometry(0.11, 10, 10),
+        new THREE.MeshBasicMaterial({ color: '#7dd3fc' })
+      );
+      scene.add(dot);
+      packets.push({ curve, dot, t: (idx * 0.13) % 1, speed: 0.22 + (idx % 3) * 0.04, fromId, toId, tube });
+    });
+
+    // 4. UI Roster & Inspector
+    let selectedId = state.agentes[0]?.id || 'maestro';
+    const rosterEl = document.getElementById('roster-pills');
+    const inspectorEl = document.getElementById('inspector-body');
+
+    function renderRoster() {
+      rosterEl.innerHTML = '';
+      state.agentes.forEach(ag => {
+        const pill = document.createElement('div');
+        pill.className = `pill ${ag.id === selectedId ? 'active' : ''}`;
+        pill.innerHTML = `<span class="dot" style="background:${ag.color}"></span>${ag.nombre.replace('Subagente ', 'S')}`;
+        pill.onclick = () => selectAgent(ag.id);
+        rosterEl.appendChild(pill);
+      });
+    }
+
+    function renderInspector() {
+      const ag = state.agentes.find(a => a.id === selectedId);
+      if (!ag) return;
+      const isWorking = ag.estado === 'TRABAJANDO';
+      inspectorEl.innerHTML = `
+        <div class="card">
+          <div class="card-label">Estado Actual</div>
+          <span class="badge ${isWorking ? 'working' : ''}">${ag.estado}</span>
+        </div>
+        <div class="card">
+          <div class="card-label">Rol y Tarea Asignada</div>
+          <div class="card-value">${ag.rol}</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Análisis Previo (Respaldo de Datos)</div>
+          <div class="card-value">${ag.analisis_previo}</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Conectado Con</div>
+          <div class="conn-list">
+            ${ag.conexiones.map(c => `<span class="conn-tag">⇄ ${c}</span>`).join('')}
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-label">Entregable / Archivo</div>
+          <div class="card-value" style="color:${ag.color}; font-weight:600;">${ag.entregable_actual}</div>
+          <div style="margin-top:8px;">
+            <a href="../produccion/Semana_01_Piloto_Indunor.pdf" target="_blank" style="color:#7dd3fc; font-size:12px; font-weight:600; text-decoration:none;">📄 Abrir PDF unificado de la Semana 1 ↗</a>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectAgent(id) {
+      selectedId = id;
+      renderRoster();
+      renderInspector();
+      Object.entries(agentVisuals).forEach(([k, v]) => {
+        v.ring.material.opacity = k === id ? 0.95 : 0.35;
+        v.monitor.material.emissiveIntensity = k === id ? 1.15 : 0.42;
+      });
+    }
+
+    renderRoster();
+    renderInspector();
+
+    // Raycaster for 3D clicking
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    let pointerDownPos = { x: 0, y: 0 };
+
+    renderer.domElement.addEventListener('pointerdown', (e) => {
+      pointerDownPos = { x: e.clientX, y: e.clientY };
+      controls.autoRotate = false;
+    });
+
+    renderer.domElement.addEventListener('pointerup', (e) => {
+      const dist = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
+      if (dist > 6) return;
+      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const hits = raycaster.intersectObjects(interactiveMeshes, false);
+      if (hits.length > 0 && hits[0].object.userData.agentId) {
+        selectAgent(hits[0].object.userData.agentId);
+      }
+    });
+
+    // Live Pipeline Simulation Button
+    let simTimer = null;
+    document.getElementById('btn-sim').onclick = () => {
+      if (simTimer) clearInterval(simTimer);
+      const order = ['maestro', 'analista', 'guionista', 'carruseles', 'editor', 'maestro'];
+      let step = 0;
+      simTimer = setInterval(() => {
+        state.agentes.forEach(a => a.estado = 'CONECTADO');
+        const activeId = order[step];
+        const ag = state.agentes.find(a => a.id === activeId);
+        if (ag) {
+          ag.estado = 'TRABAJANDO';
+          selectAgent(activeId);
+        }
+        step++;
+        if (step >= order.length) {
+          clearInterval(simTimer);
+          state.agentes.forEach(a => a.estado = a.id === 'maestro' ? 'LISTO' : 'CONECTADO');
+          renderInspector();
+        }
+      }, 1500);
+    };
+
+    document.getElementById('btn-reset-cam').onclick = () => {
+      camera.position.set(13, 12, 15);
+      controls.target.set(0, 0, 0);
+      controls.autoRotate = true;
+    };
+
+    document.getElementById('btn-reload').onclick = () => location.reload();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Animation Loop
+    const clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const dt = clock.getDelta();
+      const elapsed = clock.getElapsedTime();
+
+      brainCore.rotation.y += dt * 0.65;
+      brainCore.rotation.x = Math.sin(elapsed * 0.8) * 0.2;
+      brainCore.position.y = 1.9 + Math.sin(elapsed * 1.6) * 0.1;
+      brainInner.position.y = brainCore.position.y;
+
+      packets.forEach(p => {
+        p.t = (p.t + dt * p.speed) % 1;
+        p.dot.position.copy(p.curve.getPointAt(p.t));
+      });
+
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>
